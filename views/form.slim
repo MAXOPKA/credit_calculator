@@ -1,0 +1,21 @@
+form[action="/result" method="post"]
+  label[for="calculator[percent]"] Процент(число с плавающей точкой)
+  br/
+  input[type="text" name="calculator[percent]"]
+  br/
+  label[for="calculator[summ]"] Сумма(рубли)
+  br/
+  input[type="text" name="calculator[summ]"]
+  br/
+  label[for="calculator[type]"] Тип платежа
+  br/
+  input[type="radio" name="calculator[type]" value="annuitet"] Стандартный
+  br/
+  input[type="radio" name="calculator[type]" value="standard"] Аннуительный(равными частями)
+  br/
+  label[for="calculator[months]"] Срок(месяцы)
+  br/
+  input[type="text" name="calculator[months]"]
+  br/
+  br/
+  input[type="submit" value="Расчитать"]
