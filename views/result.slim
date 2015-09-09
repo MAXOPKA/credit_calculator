@@ -1,0 +1,26 @@
+.result
+  | Процентная ставка: #{params[:calculator][:percent]}%
+  br/
+  | Сумма кредита: #{params[:calculator][:summ]}
+  table
+    thead
+      tr
+        th номер месяца
+        th погашение кредита
+        th погашение %
+        th общий взнос
+        th остаток кредита
+    tbody
+      - @result[:rows].each do |row|
+        tr
+          td = row[:month_num]
+          td = row[:credit_repayment]
+          td = row[:percent_repayment]
+          td = row[:common_payment]
+          td = row[:credit_balance]
+      tr
+        td
+        td = @result[:total][:summ].round(2)
+        td = @result[:total][:percent_summ].round(2)
+        td = @result[:total][:total_summ].round(2)
+        td

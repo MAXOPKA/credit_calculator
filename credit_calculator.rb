@@ -1,7 +1,8 @@
 
 require 'sinatra'
 require 'slim'
-require 'lib/*'
+
+Dir[settings.root + '/lib/*.rb'].each {|file| require file }
 
 set :views, settings.root + '/views'
 
@@ -12,6 +13,6 @@ end
 
 post '/result' do
   @header = 'Результат'
-  @resul = Calculator.new.calculate params[:calculator]
+  @result = Calculator.new(params[:calculator]).calculate.result
   slim :result
 end
