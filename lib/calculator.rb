@@ -1,21 +1,21 @@
 class Calculator
 
-  TYPES = %w{standard annuitet}
-
   attr_reader :result
 
-  def initialize params
-    @percent = params[:percent].to_f
+  def initialize params = {}
+    @i = (params[:percent].to_f / 100) / 12
     @summ = params[:summ].to_f
     @months = params[:months].to_i
-    @type = params[:type] if TYPES.include?(params[:type])
-    @i = (@percent/100)/12
+    @type = params[:type]
     @result = { rows: [], total: { summ: @summ, percent_summ: 0, total_summ: @summ } }
   end
 
   def calculate
-    calculate_standard if @type == 'standard'
-    calculate_annuitet if @type == 'annuitet'
+    if @type == 'annuitet'
+      calculate_annuitet
+    else
+      calculate_standard
+    end
     @result[:total][:total_summ] = @result[:total][:total_summ] + @result[:total][:percent_summ]
     self
   end
@@ -28,7 +28,7 @@ class Calculator
       @result[:total][:percent_summ] += @percent_part = @summ * @i
       @payment_part = @month_payment - @percent_part
       @summ -= @payment_part
-      @result[:rows] << result_row(month)
+      @result[:rows] << result_row
     end
   end
 
@@ -38,13 +38,12 @@ class Calculator
       @result[:total][:percent_summ] += @percent_part = @summ * @i
       @summ -= @payment_part
       @month_payment = @payment_part + @percent_part
-      @result[:rows] << result_row(month)
+      @result[:rows] << result_row
     end
   end
 
-  def result_row month
+  def result_row
     {
-      month_num: month,
       credit_repayment: @payment_part.round(2),
       percent_repayment: @percent_part.round(2),
       common_payment: @month_payment.round(2),

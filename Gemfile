@@ -2,4 +2,8 @@ source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'slim'
-gem 'rspec'
+
+group :test do
+  gem 'rspec', '~> 3'
+  gem 'rack-test'
+end

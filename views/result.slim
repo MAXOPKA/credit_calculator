@@ -11,9 +11,9 @@
         th общий взнос
         th остаток кредита
     tbody
-      - @result[:rows].each do |row|
+      - @result[:rows].each_with_index do |row, month_num|
         tr
-          td = row[:month_num]
+          td = month_num + 1
           td = row[:credit_repayment]
           td = row[:percent_repayment]
           td = row[:common_payment]
